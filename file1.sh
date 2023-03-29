@@ -1,9 +1,17 @@
 #! /bin/bash
-read -p "nter  a number :" number
-temp=$number
-while [ $temp -ne 0 ]
-do
-   rev=$rev$((temp%10))
-   temp=$((temp/10))
-done
-echo "reverse of $number is $rev "
+echo "enter num1"
+read num1
+echo "enter num1"
+read num2
+echo "enter num1"
+read num3
+
+if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]
+then
+    echo $num1 is greater 
+elif [ $num2 -gt $num1 ] && [ $num2 -gt $num3 ]
+then
+    echo $num2 is greater
+else
+   echo $num3  is greater
+fi
