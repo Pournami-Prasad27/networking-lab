@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Please provide a username as a command line argument."
+    exit 1
+fi
+
+username=$1
+log_file="/var/log/auth.log"  # Adjust this path according to your system
+
+# Extracting the last login details of the user
+last_login=$(grep -w "sshd.*session opened" $log_file | grep -w $username | tail -n 1)
+
+if [ -z "$last_login" ]; then
+    echo "No login records found for user '$username'."
+else
+    echo "Last login details for user '$username':"
+    echo "$last_login"
+fi
+
+# Listing all failed logins for the user
+failed_logins=$(grep -w "sshd.*Failed password" $log_file | grep -w $username)
+
+if [ -z "$failed_logins" ]; then
+    echo "No failed login records found for user '$username'."
+else
+    echo "Failed login attempts for user '$username':"
+    echo "$failed_logins"
+fi
+
+# Storing the results in a file
+output_file="login_results.txt"  # Change this filename as per your preference
+
+{
+    echo "Last login details for user '$username':"
+    echo "$last_login"
+    echo
+    echo "Failed login attempts for user '$username':"
+    echo "$failed_logins"
+} > "$output_file"
+
+echo "Results have been stored in '$output_file'."
