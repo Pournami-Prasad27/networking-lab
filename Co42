@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Please provide a process name or ID as a command line argument."
+    exit 1
+fi
+
+process=$1
+
+# Check if the process is running
+if pgrep -x "$process" >/dev/null; then
+    echo "Process details for '$process':"
+    ps -p "$process" -o pid,ppid,cmd,%mem,%cpu,vsz,rss,stat,start,time
+else
+    echo "Process '$process' is not currently running."
+fi
