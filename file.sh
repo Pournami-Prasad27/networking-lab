@@ -1,19 +1,30 @@
-#! /bin/bash
-echo "Enter the filname to convert:"
+# !/bin/bash
+
+# Prompt the user for the filename to convert
+echo "Enter the filename to convert:"
 read filename
-if [ !-f $filename];
-then
-echo "File not found"
-exit 1
+
+# Check if the file exists
+if [ ! -f $filename ]; then
+  echo "File not found."
+  exit 1
 fi
-tr '[:upper:]' '[:lower:]' < $filename >lowercase.txt
+
+# Convert the file to lowercase
+tr '[:upper:]' '[:lower:]' < $filename > lowercase.txt
+
+# Count the number of lines, words, and characters
 lines=$(wc -l < lowercase.txt)
-word=$(wc -w < lowercase.txt)
+words=$(wc -w < lowercase.txt)
 characters=$(wc -c < lowercase.txt)
 
-echo "Number of lines:$lines"
+# Display the counts to the user
+echo "Number of lines: $lines"
 echo "Number of words: $words"
-echo "Number oF characters: $character"
+echo "Number of characters: $characters"
 
+# Display the converted file in descending order
 sort -r lowercase.txt
-rm  lowercase.txt 
+
+# Clean up the temporary file
+rm lowercase.txt
