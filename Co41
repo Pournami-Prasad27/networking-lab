@@ -10,4 +10,4 @@ lastLogin =$(last -n 1);
 echo "last login $lastLogin"
 loginAttempts=$(sudo cat/var/log/auth.log|/auth.log|grep $1|grep failed)
 echo"Filed login attempts of $1 are:"
-echo" Here:4login attempts"
+echo" Here:$login Attempts"
